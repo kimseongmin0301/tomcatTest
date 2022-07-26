@@ -13,13 +13,7 @@
 </head>
 <body>
 <%
-    Object loginId = session.getAttribute("id");
-    String id = (String)loginId;
-    Object tle = session.getAttribute("title");
-    String uptitle = (String)tle;
-    Object cont = session.getAttribute("content");
-    String upcontent = (String)cont;
-
+    int bno = Integer.parseInt(request.getParameter("bno"));
 
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -33,27 +27,26 @@
 
         //login을 하기 위한 sql 문장
         // prepareStatment : java -> DB에 쿼리를 보내기 위해 사용하는 객체
-        pstmt=conn.prepareStatement("select * from board where title=? and content= ? and id =?");
+        pstmt=conn.prepareStatement("select * from board where bno = ?");
 
         // 위 sql 문장을 실행(workbench : ctrl + enter)
         //executeQuery() : select(select된 결과를 ResultSet이라는 공간에 저장해서 반환)
         //executeUpdate() : insert, update, delete
-        pstmt.setString(1, uptitle);
-        pstmt.setString(2, upcontent);
-        pstmt.setString(3, id);
+        pstmt.setInt(1,bno);
         rs = pstmt.executeQuery();
 
-        while(rs.next()){
+        if(rs.next()){
+
 %>
-<form action="boardServer.jsp" accept-charset="UTF-8">
     <h1>게시판 글쓰기</h1>
+    <form action="boardList.jsp" accept-charset="UTF-8">
     <table>
         <tr>
             <td>
                 제목 :
             </td>
             <td>
-                <input type="text" size=40 name="title" value="<%=rs.getString("title")%>"><br>
+                <input type="text" value="<%=rs.getString("title")%>">
             </td>
         </tr>
         <tr>
@@ -66,15 +59,14 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="글쓰기">
+                <input type="submit" value="수정">
             </td>
         </tr>
-
-
     </table>
-    <%
-            }
+    </form>
 
+<%
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,6 +76,6 @@
             pstmt.close();
         }
     %>
-</form>
+
 </body>
 </html>

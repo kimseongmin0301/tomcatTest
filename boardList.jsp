@@ -34,12 +34,12 @@
 	    //executeUpdate() : insert, update, delete
 	   
 		rs = pstmt.executeQuery();
-	
+
 	    while(rs.next()){
 	%>	    	
 			<tr>
-				<td><%=rs.getString("bno") %></td>
-				<td><a href="boardDetail.jsp"><%=rs.getString("title") %></a></td>
+				<td><%=rs.getInt("bno") %></td>
+				<td><a href="boardDetail.jsp?bno=<%=rs.getInt("bno")%>"><%=rs.getString("title") %></a></td>
 				<td><%=rs.getString("regdate") %></td>
 				<td><%=rs.getString("cnt") %></td>
 				<td><%=rs.getString("id") %></td>
@@ -52,7 +52,7 @@
 
 
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}finally{
 			conn.close();
 			rs.close();
