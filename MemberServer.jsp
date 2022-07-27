@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.*" %>
 <%@ page import="javax.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <%
-	//»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ °ªÀ» ÀúÀå
+	//ì‚¬ìš©ìê°€ ì…ë ¥í•œ ê°’ì„ ì €ì¥
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String addr = request.getParameter("addr");
@@ -24,33 +24,35 @@
         DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
         conn = ds.getConnection();
 		
-        //È¸¿ø°¡ÀÔÀ» ÇÏ±â À§ÇÑ sql ¹®Àå
-        // prepareStatment : java -> DB¿¡ Äõ¸®¸¦ º¸³»±â À§ÇØ »ç¿ëÇÏ´Â °´Ã¼
+        //íšŒì›ê°€ì…ì„ í•˜ê¸° ìœ„í•œ sql ë¬¸ì¥
+        // prepareStatment : java -> DBì— ì¿¼ë¦¬ë¥¼ ë³´ë‚´ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ê°ì²´
         pstmt=conn.prepareStatement("insert into member(id,password,addr) values(?,?,?)");
-        // Ã¹¹øÀç ¹°À½Ç¥¿¡´Â »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id°ª(request.getParameter(id))À» ¼³Á¤
+        // ì²«ë²ˆì¬ ë¬¼ìŒí‘œì—ëŠ” ì‚¬ìš©ìê°€ ì…ë ¥í•œ idê°’(request.getParameter(id))ì„ ì„¤ì •
 		pstmt.setString(1,id);
-        // µÎ¹øÀç ¹°À½Ç¥¿¡´Â »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id°ª(request.getParameter(pw))À» ¼³Á¤
+        // ë‘ë²ˆì¬ ë¬¼ìŒí‘œì—ëŠ” ì‚¬ìš©ìê°€ ì…ë ¥í•œ idê°’(request.getParameter(pw))ì„ ì„¤ì •
  		pstmt.setString(2,pw);
-        // ¼¼¹øÀç ¹°À½Ç¥¿¡´Â »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ id°ª(request.getParameter(addr))À» ¼³Á¤
+        // ì„¸ë²ˆì¬ ë¬¼ìŒí‘œì—ëŠ” ì‚¬ìš©ìê°€ ì…ë ¥í•œ idê°’(request.getParameter(addr))ì„ ì„¤ì •
 		pstmt.setString(3,addr);
         
-		// À§ sql ¹®ÀåÀ» ½ÇÇà(workbench : ctrl + enter)
+		// ìœ„ sql ë¬¸ì¥ì„ ì‹¤í–‰(workbench : ctrl + enter)
 		int result = pstmt.executeUpdate();
-        //executeQuery() : select(selectµÈ °á°ú¸¦ ResultSetÀÌ¶ó´Â °ø°£¿¡ ÀúÀåÇØ¼­ ¹İÈ¯)
+        //executeQuery() : select(selectëœ ê²°ê³¼ë¥¼ ResultSetì´ë¼ëŠ” ê³µê°„ì— ì €ì¥í•´ì„œ ë°˜í™˜)
         //executeUpdate() : insert, update, delete
-       
-        //insert°¡ µÇ¾úÀ¸¸é result == 1
-        if(result != 0){
-        	//·Î±×ÀÎ È­¸éÀ¸·Î ÀÌµ¿
-        	out.println("<script>");
-        	out.println("location.href='index.jsp'");
-        	out.println("</script>");
-        }else{ //¾Æ´Ï¸é
-        	//È¸¿ø°¡ÀÔ È­¸éÀ¸·Î ÀÌµ¿
-        	out.println("<script>");
-        	out.println("location.href='member.jsp'");
-        	out.println("</script>");
-        }
+
+
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+        //insertê°€ ë˜ì—ˆìœ¼ë©´ result == 1
+//        if(result != 0){
+//        	//ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™
+//        	out.println("<script>");
+//        	out.println("location.href='index.jsp'");
+//        	out.println("</script>");
+//        }else{ //ì•„ë‹ˆë©´
+//        	//íšŒì›ê°€ì… í™”ë©´ìœ¼ë¡œ ì´ë™
+//        	out.println("<script>");
+//        	out.println("location.href='member.jsp'");
+//        	out.println("</script>");
+//        }
         
     } catch (Exception e) {
         e.printStackTrace();

@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<h1>х╦©Ь╟║ют</h1>
+<h1>М ▄Л⌡░Й╟─Л·┘</h1>
 
 <form action="MemberServer.jsp" accept-charset="UTF-8">
 	<table>
@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<input type="submit" value = "х╦©Ь╟║ют">
+				<input type="submit" value = "М ▄Л⌡░Й╟─Л·┘">
 			</td>
 		</tr>
 	</table>

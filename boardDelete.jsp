@@ -29,18 +29,18 @@
         //executeQuery() : select(select된 결과를 ResultSet이라는 공간에 저장해서 반환)
         //executeUpdate() : insert, update, delete
 
+        response.sendRedirect(request.getContextPath() + "/boardList.jsp");
+
         //insert가 되었으면 result == 1
-        if(result != 0){
-            //로그인 화면으로 이동
-            out.println("<script>");
-            out.println("location.href='boardList.jsp'");
-            out.println("</script>");
-        }else{ //아니면
-            //회원가입 화면으로 이동
-            out.println("<script>");
-            out.println("location.href='boardDetail.jsp'");
-            out.println("</script>");
-        }
+//        if(result != 0){
+//            out.println("<script>");
+//            out.println("location.href='boardList.jsp'");
+//            out.println("</script>");
+//        }else{ //아니면
+//            out.println("<script>");
+//            out.println("location.href='boardDetail.jsp'");
+//            out.println("</script>");
+//        }
 
     } catch (Exception e) {
         e.printStackTrace();

@@ -19,8 +19,6 @@
 
     Connection conn = null;
     PreparedStatement pstmt = null;
-    PreparedStatement pstmt2 = null;
-    ResultSet rs = null;
 
     try{
         Context init = new InitialContext();
@@ -30,14 +28,11 @@
         //회원가입을 하기 위한 sql 문장
         // prepareStatment : java -> DB에 쿼리를 보내기 위해 사용하는 객체
         pstmt=conn.prepareStatement("update board set title=?, content = ? where bno = ?");
-        pstmt2=conn.prepareStatement("select * from board where bno =?");
-        // 첫번재 물음표에는 사용자가 입력한 id값(request.getParameter(id))을 설정
+
         pstmt.setString(1,title);
         pstmt.setString(2,content);
         pstmt.setInt(3,bno);
-        pstmt2.setInt(1,bno);
 
-        rs = pstmt2.executeQuery();
 
         // 위 sql 문장을 실행(workbench : ctrl + enter)
         int result = pstmt.executeUpdate();
@@ -59,7 +54,6 @@
         e.printStackTrace();
     }finally{
         conn.close();
-        rs.close();
         pstmt.close();
     }
 %>

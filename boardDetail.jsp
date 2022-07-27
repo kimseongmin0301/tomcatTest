@@ -46,7 +46,7 @@
 
 %>
     <h1>게시판 글쓰기</h1>
-<%--<form action='boardIDcheck.jsp?rs.getString("id")' accept-charset="UTF-8">--%>
+<form action="boardUpdate.jsp?id=<%=rs.getString("id")%>" method="get">
     <table>
 
         <tr>
@@ -68,18 +68,18 @@
 
         <tr>
             <td colspan="2">
-                <a href="boardIDcheck.jsp?id=<%=rs.getString("id")%>"> <input type="submit" value="수정"></a>
+                <input type="submit" value="수정">
             </td>
             <td>
-                   <a href="boardList.jsp"><input type="button" value="목록"></a>
+                <input type="submit" value="목록" formaction="boardList.jsp">
             </td>
             <td>
-                <a href="boardDelete.jsp"><input type="button" value="삭제"></a>
+                <input type="submit" value="삭제" formaction="boardDelete.jsp">
             </td>
         </tr>
     </table>
+</form>
 
-<%--</form>--%>
 <%
     session.setAttribute("contentId",contentID);
             }

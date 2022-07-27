@@ -14,17 +14,11 @@
     String id = request.getParameter("id");
     String pw = request.getParameter("pw");
 
-
-    System.out.println(id);
-    System.out.println(pw);
-
     //db연결
-    
     Connection conn = null;
 	PreparedStatement pstmt = null;	
     ResultSet rs = null;
 
-		
     try{
         Context init = new InitialContext();
         DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
@@ -42,8 +36,6 @@
 		// 위 sql 문장을 실행(workbench : ctrl + enter)
         //executeQuery() : select(select된 결과를 ResultSet이라는 공간에 저장해서 반환)
         //executeUpdate() : insert, update, delete
-       
-		
 		rs = pstmt.executeQuery();
 
         if(rs.next()){ //데이터있냐
@@ -60,11 +52,7 @@
             out.println("location.href='index.jsp'");
             out.println("</script>");
 		}
-        
-        
-//        System.out.println("DB연결성공");
     } catch (Exception e) {
-//        System.out.println("db 실패");
         e.printStackTrace();
     }finally{
     	conn.close();
