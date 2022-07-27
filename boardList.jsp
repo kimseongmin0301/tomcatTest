@@ -45,11 +45,8 @@
 				<td><%=rs.getString("id") %></td>
 			</tr>
 
-
-
 	<%
 		}
-
 
 		} catch (Exception e) {
 			e.printStackTrace();

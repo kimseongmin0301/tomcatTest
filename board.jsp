@@ -23,18 +23,17 @@
 			내용 :
 		</td>
 		<td>
-			<textarea cols="40" rows="10" name="content"></textarea><br>
+			<textarea cols="40" rows="10" style= "resize : none;" name="content"></textarea><br>
 		</td>
 	</tr>
 	 <tr>
 	 	<td colspan="2">
-
 	 			 <input type="submit" value="글쓰기">
-
 	 	</td>
+		 <td>
+			 <a href="boardList.jsp"><input type="button" value="취소"></a>
+		 </td>
 	 </tr>
-	 
-
 	</table>
 </form>
 

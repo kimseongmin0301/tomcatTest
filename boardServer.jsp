@@ -15,8 +15,8 @@
 	String id = (String)loginId;
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
-	session.setAttribute("content",content);
-	session.setAttribute("title",title);
+
+
 
     Connection conn = null;
 	PreparedStatement pstmt = null;	
@@ -43,12 +43,11 @@
        
         //insert가 되었으면 result == 1
         if(result != 0){
-        	//로그인 화면으로 이동
+
         	out.println("<script>");
         	out.println("location.href='boardList.jsp'");
         	out.println("</script>");
         }else{ //아니면
-        	//회원가입 화면으로 이동
         	out.println("<script>");
         	out.println("location.href='board.jsp'");
         	out.println("</script>");
