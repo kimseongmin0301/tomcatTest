@@ -15,11 +15,11 @@
     String contentId = request.getParameter("id");
 
 
-    if(logId.equals(contentId)) {
-                out.println("<script>");
-                out.println("location.href='boardUpdate.jsp'");
-                out.println("</script>");
-    }else{
+    if (logId.equals(contentId)) {
+        out.println("<script>");
+        out.println("location.href='boardUpdate.jsp'");
+        out.println("</script>");
+    } else {
         out.println("<script>");
         out.println("alert('권한없음')");
         out.println("location.href='boardList.jsp'");

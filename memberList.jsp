@@ -2,60 +2,67 @@
 <%@ page import="javax.naming.*" %>
 <%@ page import="javax.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 </head>
 <body>
-<h1>È¸¿ø¸ñ·Ï ¸®½ºÆ®</h1>
-<table border = 1>
-	<tr>
-		<td>¾ÆÀÌµğ</td><td>ÁÖ¼Ò</td><td>ÀÌ¸ŞÀÏ</td><td>ÀÌ¸§</td>
-	</tr>
-<%
-	Connection conn = null;
-	PreparedStatement pstmt = null;	
-	ResultSet rs = null;
+<h1>íšŒì›ëª©ë¡ ë¦¬ìŠ¤íŠ¸</h1>
+<table border=1>
+    <tr>
+        <td>ì•„ì´ë””</td>
+        <td>ì£¼ì†Œ</td>
+        <td>ì´ë©”ì¼</td>
+        <td>ì´ë¦„</td>
+    </tr>
+    <%
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-	
-	try{
-	    Context init = new InitialContext();
-	    DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
-	    conn = ds.getConnection();
-		
-	    //loginÀ» ÇÏ±â À§ÇÑ sql ¹®Àå
-	    // prepareStatment : java -> DB¿¡ Äõ¸®¸¦ º¸³»±â À§ÇØ »ç¿ëÇÏ´Â °´Ã¼
-	    pstmt=conn.prepareStatement("select * from member");
-	   
-		// À§ sql ¹®ÀåÀ» ½ÇÇà(workbench : ctrl + enter)
-	    //executeQuery() : select(selectµÈ °á°ú¸¦ ResultSetÀÌ¶ó´Â °ø°£¿¡ ÀúÀåÇØ¼­ ¹İÈ¯)
-	    //executeUpdate() : insert, update, delete
-	   
-		rs = pstmt.executeQuery();
 
-	    while(rs.next()){
-%>	    	
-			<tr>
-				<td><%=rs.getString("id") %></td>
-				<td><%=rs.getString("addr") %></td>
-				<td><%=rs.getString("email") %></td>
-				<td><%=rs.getString("name") %></td>
-			</tr>
-<%
-		}
-    
-    
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}finally{
-		conn.close();
-		rs.close();
-		pstmt.close();
-	}
-%>
+        try {
+            Context init = new InitialContext();
+            DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
+            conn = ds.getConnection();
+
+            //loginì„ í•˜ê¸° ìœ„í•œ sql ë¬¸ì¥
+            // prepareStatment : java -> DBì— ì¿¼ë¦¬ë¥¼ ë³´ë‚´ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ê°ì²´
+            pstmt = conn.prepareStatement("select * from member");
+
+            // ìœ„ sql ë¬¸ì¥ì„ ì‹¤í–‰(workbench : ctrl + enter)
+            //executeQuery() : select(selectëœ ê²°ê³¼ë¥¼ ResultSetì´ë¼ëŠ” ê³µê°„ì— ì €ì¥í•´ì„œ ë°˜í™˜)
+            //executeUpdate() : insert, update, delete
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+    %>
+    <tr>
+        <td><%=rs.getString("id") %>
+        </td>
+        <td><%=rs.getString("addr") %>
+        </td>
+        <td><%=rs.getString("email") %>
+        </td>
+        <td><%=rs.getString("name") %>
+        </td>
+    </tr>
+    <%
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+            rs.close();
+            pstmt.close();
+        }
+    %>
 </table>
 </body>
 </html>

@@ -12,7 +12,7 @@
 
     try {
         Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exam?serverTimezone=Asia/Seoul","root","1234");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exam?serverTimezone=Asia/Seoul", "root", "1234");
 
         System.out.println("db 연결 성공");
 

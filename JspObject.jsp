@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action ="ObjectServer.jsp">
+<form action="main.jsp">
     이름 : <input type="text" name="name">
     아이디 : <input type="text" name="id">
     <input type="submit" value="전송">

@@ -11,7 +11,7 @@
         String name = request.getParameter("name");
         String id = request.getParameter("id");
 
-        session.setAttribute("id",id);
+        session.setAttribute("id", id);
     %>
 
 </head>

@@ -15,11 +15,11 @@
 <%
     Connection conn = null;
 
-    try{
+    try {
         Context init = new InitialContext();
-        DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
-        conn = ds.getConnection();  
-                  
+        DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
+        conn = ds.getConnection();
+
         System.out.println("DB 연결 성공!");
     } catch (Exception e) {
         System.out.println("DB 연결 실패 TT");

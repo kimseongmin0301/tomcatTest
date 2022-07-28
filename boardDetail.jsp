@@ -14,7 +14,7 @@
 <body>
 <%
     int bno = Integer.parseInt(request.getParameter("bno"));
-    session.setAttribute("bno",bno);
+    session.setAttribute("bno", bno);
 
     String contentID = request.getParameter("id");
 
@@ -25,27 +25,27 @@
     ResultSet rs = null;
 
 
-    try{
+    try {
         Context init = new InitialContext();
-        DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
+        DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
         conn = ds.getConnection();
 
         //login을 하기 위한 sql 문장
         // prepareStatment : java -> DB에 쿼리를 보내기 위해 사용하는 객체
-        pstmt=conn.prepareStatement("select * from board where bno = ?");
-        pstmt2=conn.prepareStatement("update board set cnt = cnt + 1 where bno = ?");
+        pstmt = conn.prepareStatement("select * from board where bno = ?");
+        pstmt2 = conn.prepareStatement("update board set cnt = cnt + 1 where bno = ?");
         // 위 sql 문장을 실행(workbench : ctrl + enter)
         //executeQuery() : select(select된 결과를 ResultSet이라는 공간에 저장해서 반환)
         //executeUpdate() : insert, update, delete
-        pstmt.setInt(1,bno);
-        pstmt2.setInt(1,bno);
+        pstmt.setInt(1, bno);
+        pstmt2.setInt(1, bno);
         rs = pstmt.executeQuery();
         int result = pstmt2.executeUpdate();
 
-        if(rs.next()){
+        if (rs.next()) {
 
 %>
-    <h1>게시판 글쓰기</h1>
+<h1>게시판 글쓰기</h1>
 <form action="boardUpdate.jsp?id=<%=rs.getString("id")%>" method="get">
     <table>
 
@@ -62,7 +62,8 @@
                 내용 :
             </td>
             <td>
-                <textarea cols="40" rows="10" style= "resize : none;" name="content" readonly><%=rs.getString("content")%></textarea><br>
+                <textarea cols="40" rows="10" style="resize : none;" name="content"
+                          readonly><%=rs.getString("content")%></textarea><br>
             </td>
         </tr>
 
@@ -81,17 +82,17 @@
 </form>
 
 <%
-    session.setAttribute("contentId",contentID);
-            }
-
-        }        catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            conn.close();
-            rs.close();
-            pstmt.close();
+            session.setAttribute("contentId", contentID);
         }
-    %>
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        conn.close();
+        rs.close();
+        pstmt.close();
+    }
+%>
 
 </body>
 </html>
