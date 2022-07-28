@@ -38,7 +38,7 @@
 
 %>
 <h1>게시판 글쓰기</h1>
-<form action="boardUpdateServer.jsp" accept-charset="UTF-8">
+<form action="boardUpdateServer.jsp" method="get" accept-charset="UTF-8">
 <table>
     <tr>
         <td>
@@ -46,6 +46,7 @@
         </td>
         <td>
             <input type="text" name="title" value="<%=rs.getString("title")%>">
+            <input type="text" name="bno" hidden value="<%=rs.getString("bno")%>">
         </td>
     </tr>
     <tr>
@@ -61,11 +62,11 @@
                 <input type="submit" value="수정하기">
         </td>
         <td>
-               <a href="boardList.jsp"> <input type="button" value="취소"></a>
+              <input type="submit" formaction="boardDetail.jsp?bno=<%=rs.getInt("bno")%>" value="취소">
         </td>
     </tr>
 </table>
-
+    boardDetail.jsp?bno=<%=rs.getInt("bno")%>
 </form>
 <%
         }
